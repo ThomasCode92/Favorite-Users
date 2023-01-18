@@ -17,6 +17,7 @@ const AddUser = props => {
     if (parseInt(enteredAge) < 1) return;
 
     console.log(enteredUsername, enteredAge);
+    props.onAddUser(enteredUsername, enteredAge);
 
     setEnteredUsername('');
     setEnteredAge('');
