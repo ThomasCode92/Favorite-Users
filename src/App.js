@@ -1,28 +1,19 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useContext } from 'react';
 
 import MainHeader from './components/MainHeader/MainHeader';
 import Login from './components/Login/Login';
 import Home from './components/Home/Home';
+import AuthContext from './contexts/auth-context';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const loginHandler = (email, password) => {
-    // We should of course check email and password
-    // But it's just a dummy/ demo anyways
-    setIsLoggedIn(true);
-  };
-
-  const logoutHandler = () => {
-    setIsLoggedIn(false);
-  };
+  const authCtx = useContext(AuthContext);
 
   return (
     <Fragment>
-      <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
+      <MainHeader />
       <main>
-        {!isLoggedIn && <Login onLogin={loginHandler} />}
-        {isLoggedIn && <Home onLogout={logoutHandler} />}
+        {!authCtx.isLoggedIn && <Login />}
+        {authCtx.isLoggedIn && <Home />}
       </main>
     </Fragment>
   );
